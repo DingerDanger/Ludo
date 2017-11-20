@@ -1,0 +1,5 @@
+/Users/user/Projects/Ludo/Ludo/obj/x86/Debug/Ludo.csproj.CoreCompileInputs.cache
+/Users/user/Projects/Ludo/Ludo/bin/Debug/Ludo.exe
+/Users/user/Projects/Ludo/Ludo/bin/Debug/Ludo.pdb
+/Users/user/Projects/Ludo/Ludo/obj/x86/Debug/Ludo.exe
+/Users/user/Projects/Ludo/Ludo/obj/x86/Debug/Ludo.pdb
