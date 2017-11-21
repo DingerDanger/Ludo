@@ -1,8 +1,9 @@
 ﻿<Properties StartupConfiguration="{2C9BE685-DB2A-426C-86A0-EEBC64A3AE83}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Ludo/Board.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Ludo/Dice.cs">
     <Files>
-      <File FileName="Ludo/Program.cs" Line="10" Column="13" />
       <File FileName="Ludo/Board.cs" Line="1" Column="1" />
+      <File FileName="Ludo/Program.cs" Line="1" Column="1" />
+      <File FileName="Ludo/Dice.cs" Line="8" Column="13" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
