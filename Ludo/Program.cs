@@ -7,7 +7,8 @@ namespace Ludo
     {
         public static void Main(string[] args)
         {
-            Board bleh = new Board();
+            Dice die = new Dice(6);
+            die.Throw();
         }
     }
 }
