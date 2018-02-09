@@ -3,7 +3,7 @@ namespace Ludo
 {
     public class Board
     {
-        private string tileSize = "OwO ";
+        private string tileSize = "    ";
 
         private char[][] eBoLa = new char[17][];
         private char[] path = new char[93];
@@ -12,6 +12,7 @@ namespace Ludo
 
         public Board()
         {
+            Console.Clear();
             PathReset();
 
             eBoLa[0] = new char[]  { 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B' };
@@ -182,6 +183,7 @@ namespace Ludo
                         break;
                 }
             }
+
         }
     }
 }

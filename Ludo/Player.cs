@@ -4,7 +4,7 @@ namespace Ludo
     public class Player
     {
 
-        private int[] path = new int[62];
+        private int[] path = new int[58];
         private Piece[] pieces = new Piece[4];
 
 
@@ -30,11 +30,6 @@ namespace Ludo
                         a++;
                     }
 
-                    for (int i = 77; i <= 80; i++)
-                    {
-                        path[a] = i;
-                        a++;
-                    }
 
                     break;
 
@@ -58,11 +53,6 @@ namespace Ludo
                         a++;
                     }
 
-                    for (int i = 81; i <= 84; i++)
-                    {
-                        path[a] = i;
-                        a++;
-                    }
 
                     break;
 
@@ -86,11 +76,6 @@ namespace Ludo
                         a++;
                     }
 
-                    for (int i = 85; i <= 88; i++)
-                    {
-                        path[a] = i;
-                        a++;
-                    }
 
                     break;
 
