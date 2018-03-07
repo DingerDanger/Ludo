@@ -13,46 +13,14 @@ namespace Ludo
         public Board()
         {
             Console.Clear();
-            PathReset();
-
-            eBoLa[0] = new char[]  { 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B' };
-
-            eBoLa[1] = new char[]  { 'B', 'r', 'r', 'r', 'r', 'r', 'r', path[11], path[12], path[13], 'b', 'b', 'b', 'b', 'b', 'b', 'B' };
-
-            eBoLa[2] = new char[]  { 'B', 'r', path[78], 'r', 'r', path[79], 'r', path[10], path[59], path[14], 'b', path[81], 'b', 'b', path[82], 'b', 'B' };
-
-            eBoLa[3] = new char[]  { 'B', 'r', 'r', 'r', 'r', 'r', 'r',  path[9], path[60], path[15], 'b', 'b', 'b', 'b', 'b', 'b', 'B' };
-
-            eBoLa[4] = new char[]  { 'B', 'r', 'r', 'r', 'r', 'r', 'r',  path[8], path[61], path[16], 'b', 'b', 'b', 'b', 'b', 'b', 'B' };
-
-            eBoLa[5] = new char[]  { 'B', 'r', path[77], 'r', 'r', path[80], 'r',  path[7], path[62], path[17], 'b', path[84], 'b', 'b', path[83], 'b', 'B' };
-
-            eBoLa[6] = new char[]  { 'B', 'r', 'r', 'r', 'r', 'r', 'r',  path[6], path[63], path[18], 'b', 'b', 'b', 'b', 'b', 'b', 'B' };
-
-            eBoLa[7] = new char[]  { 'B', path[52],  path[1],  path[2],  path[3],  path[4],  path[5], 'B', path[64], 'B', path[19], path[20], path[21], path[22], path[23], path[24], 'B' };
-
-            eBoLa[8] = new char[]  { 'B', path[51], path[53], path[54], path[55], path[56], path[57], path[58], 'B', path[70], path[69], path[68], path[67], path[66], path[65], path[25], 'B' };
-
-            eBoLa[9] = new char[]  { 'B', path[50], path[49], path[48], path[47], path[46], path[45], 'B', path[76], 'B', path[31], path[30], path[29], path[28], path[27], path[26], 'B' };
-
-            eBoLa[10] = new char[] { 'B', 'g', 'g', 'g', 'g', 'g', 'g', path[44], path[75], path[32], 'y', 'y', 'y', 'y', 'y', 'y', 'B' };
-
-            eBoLa[11] = new char[] { 'B', 'g', path[91], 'g', 'g', path[92], 'g', path[43], path[74], path[33], 'y', path[88], 'y', 'y', path[85], 'y', 'B' };
-
-            eBoLa[12] = new char[] { 'B', 'g', 'g', 'g', 'g', 'g', 'g', path[42], path[73], path[34], 'y', 'y', 'y', 'y', 'y', 'y', 'B' };
-
-            eBoLa[13] = new char[] { 'B', 'g', 'g', 'g', 'g', 'g', 'g', path[41], path[72], path[35], 'y', 'y', 'y', 'y', 'y', 'y', 'B' };
-
-            eBoLa[14] = new char[] { 'B', 'g', path[90], 'g', 'g', path[89], 'g', path[40], path[71], path[36], 'y', path[87], 'y', 'y', path[86], 'y', 'B' };
-
-            eBoLa[15] = new char[] { 'B', 'g', 'g', 'g', 'g', 'g', 'g', path[39], path[38], path[37], 'y', 'y', 'y', 'y', 'y', 'y', 'B' };
-
-            eBoLa[16] = new char[] { 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B' };
         }
 
-        public void Draw()
+        public void Draw(int[][] placeList)
         {
-            Console.Clear();
+
+            Console.SetCursorPosition(0,0);
+
+            PathReset(placeList);
 
             foreach (var row in this.eBoLa)
             {
@@ -62,49 +30,52 @@ namespace Ludo
                     {
                         switch (tile)
                         {
+                            case 'r':
+								Console.BackgroundColor = ConsoleColor.Red;
+                                break;
+
                             case 'b':
-                                Console.BackgroundColor = ConsoleColor.Blue;
-                                Console.Write(this.tileSize);
-                                Console.ResetColor();
+								Console.BackgroundColor = ConsoleColor.Blue;
                                 break;
 
                             case 'y':
-                                Console.BackgroundColor = ConsoleColor.Yellow;
-                                Console.Write(this.tileSize);
-                                Console.ResetColor();
-                                break;
-
-                            case 'r':
-                                Console.BackgroundColor = ConsoleColor.Red;
-                                Console.Write(this.tileSize);
-                                Console.ResetColor();
+								Console.BackgroundColor = ConsoleColor.Yellow;
                                 break;
 
                             case 'g':
                                 Console.BackgroundColor = ConsoleColor.Green;
-                                Console.Write(this.tileSize);
-                                Console.ResetColor();
                                 break;
 
                             case 'w':
                                 Console.BackgroundColor = ConsoleColor.White;
-                                Console.Write(this.tileSize);
-                                Console.ResetColor();
                                 break;
 
                             case 'B':
                                 Console.BackgroundColor = ConsoleColor.Black;
-                                Console.Write(this.tileSize);
-                                Console.ResetColor();
                                 break;
 
                             case 'G':
                                 Console.BackgroundColor = ConsoleColor.Gray;
-                                Console.Write(this.tileSize);
-                                Console.ResetColor();
+                                break;
+
+                            case '0':
+                                Console.BackgroundColor = ConsoleColor.DarkRed;
+                                break;
+
+                            case '1':
+                                Console.BackgroundColor = ConsoleColor.DarkBlue;
+                                break;
+
+                            case '2':
+                                Console.BackgroundColor = ConsoleColor.DarkYellow;
+                                break;
+
+                            case '3':
+                                Console.BackgroundColor = ConsoleColor.DarkGreen;
                                 break;
                         }
-
+                        Console.Write(this.tileSize);
+                        Console.ResetColor();
 
                     }
                     Console.WriteLine();
@@ -114,12 +85,19 @@ namespace Ludo
 
         }
 
-        public void PiecePlacement()
-        {
-            
-        }
+        //public void PiecePlacement(int[][] placeList)
+        //{
+        //    for (int i = 0; i < 4; i++)
+        //    {
+        //        for (int ii = 0; ii < 4; ii++)
+        //        {
+        //            char[] temp = i.ToString().ToCharArray();
+        //            path[placeList[i][ii]] = temp[0];
+        //        }
+        //    }
+        //}
 
-        public void PathReset()
+        public void PathReset(int[][] placeList)
         {
             for (int i = 1; i <= 92; i++)
             {
@@ -176,6 +154,7 @@ namespace Ludo
                             path[i] = 'w';
                         }
 
+
                         else
                         {
                             path[i] = 'G';
@@ -184,6 +163,48 @@ namespace Ludo
                 }
             }
 
+            for (int i = 0; i < placeList.GetLength(0); i++)
+            {
+                for (int ii = 0; ii < placeList[i].GetLength(0); ii++)
+                {
+                    char[] temp = i.ToString().ToCharArray();
+                    path[placeList[i][ii]] = temp[0];
+                }
+            }
+
+            eBoLa[0] = new char[] { 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B' };
+
+            eBoLa[1] = new char[] { 'B', 'r', 'r', 'r', 'r', 'r', 'r', path[11], path[12], path[13], 'b', 'b', 'b', 'b', 'b', 'b', 'B' };
+
+            eBoLa[2] = new char[] { 'B', 'r', path[78], 'r', 'r', path[79], 'r', path[10], path[59], path[14], 'b', path[81], 'b', 'b', path[82], 'b', 'B' };
+
+            eBoLa[3] = new char[] { 'B', 'r', 'r', 'r', 'r', 'r', 'r', path[9], path[60], path[15], 'b', 'b', 'b', 'b', 'b', 'b', 'B' };
+
+            eBoLa[4] = new char[] { 'B', 'r', 'r', 'r', 'r', 'r', 'r', path[8], path[61], path[16], 'b', 'b', 'b', 'b', 'b', 'b', 'B' };
+
+            eBoLa[5] = new char[] { 'B', 'r', path[77], 'r', 'r', path[80], 'r', path[7], path[62], path[17], 'b', path[84], 'b', 'b', path[83], 'b', 'B' };
+
+            eBoLa[6] = new char[] { 'B', 'r', 'r', 'r', 'r', 'r', 'r', path[6], path[63], path[18], 'b', 'b', 'b', 'b', 'b', 'b', 'B' };
+
+            eBoLa[7] = new char[] { 'B', path[52], path[1], path[2], path[3], path[4], path[5], 'B', path[64], 'B', path[19], path[20], path[21], path[22], path[23], path[24], 'B' };
+
+            eBoLa[8] = new char[] { 'B', path[51], path[53], path[54], path[55], path[56], path[57], path[58], 'B', path[70], path[69], path[68], path[67], path[66], path[65], path[25], 'B' };
+
+            eBoLa[9] = new char[] { 'B', path[50], path[49], path[48], path[47], path[46], path[45], 'B', path[76], 'B', path[31], path[30], path[29], path[28], path[27], path[26], 'B' };
+
+            eBoLa[10] = new char[] { 'B', 'g', 'g', 'g', 'g', 'g', 'g', path[44], path[75], path[32], 'y', 'y', 'y', 'y', 'y', 'y', 'B' };
+
+            eBoLa[11] = new char[] { 'B', 'g', path[91], 'g', 'g', path[92], 'g', path[43], path[74], path[33], 'y', path[88], 'y', 'y', path[85], 'y', 'B' };
+
+            eBoLa[12] = new char[] { 'B', 'g', 'g', 'g', 'g', 'g', 'g', path[42], path[73], path[34], 'y', 'y', 'y', 'y', 'y', 'y', 'B' };
+
+            eBoLa[13] = new char[] { 'B', 'g', 'g', 'g', 'g', 'g', 'g', path[41], path[72], path[35], 'y', 'y', 'y', 'y', 'y', 'y', 'B' };
+
+            eBoLa[14] = new char[] { 'B', 'g', path[90], 'g', 'g', path[89], 'g', path[40], path[71], path[36], 'y', path[87], 'y', 'y', path[86], 'y', 'B' };
+
+            eBoLa[15] = new char[] { 'B', 'g', 'g', 'g', 'g', 'g', 'g', path[39], path[38], path[37], 'y', 'y', 'y', 'y', 'y', 'y', 'B' };
+
+            eBoLa[16] = new char[] { 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B' };
         }
     }
 }

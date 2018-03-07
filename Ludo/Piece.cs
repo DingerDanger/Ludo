@@ -13,7 +13,7 @@ namespace Ludo
         }
 
         public void Move(int spaces)
-        {
+        { 
             position += spaces;
 
             if (position > 57)

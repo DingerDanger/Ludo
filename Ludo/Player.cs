@@ -4,8 +4,9 @@ namespace Ludo
     public class Player
     {
 
-        private int[] path = new int[58];
+        private int[] path = new int[62];
         private Piece[] pieces = new Piece[4];
+        private bool moved = false;
 
 
         public Player(int playerID)
@@ -25,6 +26,12 @@ namespace Ludo
                     }
 
                     for (int i = 53; i <= 58; i++)
+                    {
+                        path[a] = i;
+                        a++;
+                    }
+
+                    for (int i = 77; i <= 80; i++)
                     {
                         path[a] = i;
                         a++;
@@ -53,6 +60,12 @@ namespace Ludo
                         a++;
                     }
 
+                    for (int i = 81; i <= 84; i++)
+                    {
+                        path[a] = i;
+                        a++;
+                    }
+
 
                     break;
 
@@ -76,6 +89,11 @@ namespace Ludo
                         a++;
                     }
 
+                    for (int i = 85; i <= 88; i++)
+                    {
+                        path[a] = i;
+                        a++;
+                    }
 
                     break;
 
@@ -128,6 +146,7 @@ namespace Ludo
 
         public int Place(int piecePosition, int piece)
         {
+            piece += 1;
             if (piecePosition == 0)
             {
                 switch (piece)
@@ -153,6 +172,12 @@ namespace Ludo
             {
                 return path[piecePosition];
             }
+        }
+
+        public bool Moved 
+        {
+            get { return moved; }
+            set { moved = value; }
         }
     }
 }

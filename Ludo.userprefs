@@ -1,12 +1,30 @@
 ﻿<Properties StartupConfiguration="{2C9BE685-DB2A-426C-86A0-EEBC64A3AE83}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Ludo/Game.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Ludo/Piece.cs">
     <Files>
-      <File FileName="Ludo/Program.cs" Line="10" Column="35" />
-      <File FileName="Ludo/Game.cs" Line="64" Column="65" />
-      <File FileName="Ludo/Board.cs" Line="186" Column="13" />
-      <File FileName="Ludo/Piece.cs" Line="28" Column="14" />
-      <File FileName="Ludo/Player.cs" Line="7" Column="40" />
+      <File FileName="Ludo/Program.cs" Line="14" Column="37" NotebookId="1" />
+      <File FileName="Ludo/Game.cs" Line="248" Column="16" NotebookId="1" />
+      <File FileName="Ludo/Dice.cs" Line="22" Column="10" NotebookId="1" />
     </Files>
+    <FloatingWindows>
+      <FloatingWindow WindowId="1" X="1280" Y="0" Width="1280" Height="1024">
+        <Files>
+          <File FileName="Ludo/Player.cs" Line="180" Column="34" />
+          <File FileName="Ludo/Board.cs" Line="39" Column="39" />
+          <File FileName="Ludo/Piece.cs" Line="16" Column="11" />
+        </Files>
+      </FloatingWindow>
+    </FloatingWindows>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Ludo" expanded="True">
+            <Node name="Ludo" expanded="True">
+              <Node name="Piece.cs" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

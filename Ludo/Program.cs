@@ -7,7 +7,12 @@ namespace Ludo
     {
         public static void Main(string[] args)
         {
-            Game br = new Game(); 
+            while(true)
+            {
+				Game br = new Game();
+                Thread.Sleep(5000);
+                Console.Clear();    
+            }
         }
     }
 }
