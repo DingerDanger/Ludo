@@ -10,7 +10,7 @@ namespace Ludo
             while(true)
             {
 				Game br = new Game();
-                Thread.Sleep(5000);
+                Thread.Sleep(2000);
                 Console.Clear();    
             }
         }

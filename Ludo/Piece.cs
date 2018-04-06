@@ -30,7 +30,7 @@ namespace Ludo
 
         public int GetId() => id;
 
-        public bool IsDone() => done;
+        public bool IsDone => done;
 
         public int Position
         {

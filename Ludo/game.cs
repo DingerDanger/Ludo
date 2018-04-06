@@ -16,6 +16,7 @@ namespace Ludo
         private int playerMin = 2;
         private int playerMax = 4;
         private int nrOfPieces = 4;
+        private bool won = false;
 
         public Game()
         {
@@ -25,7 +26,6 @@ namespace Ludo
 
         }
 
-        // todo: name creation thingy
         public void Menu()
         {
             int page = 1;
@@ -71,7 +71,7 @@ namespace Ludo
                             {
                                 page = 1;
                             }
-                        }
+                        } 
 
                         break;
 
@@ -114,6 +114,7 @@ namespace Ludo
         {
             int[][] temp = new int[nrOfPlayers][];
 
+            // slå hjem mechanic
             for (int player = 0; player < nrOfPlayers; player++)
             {
                 temp[player] = new int[nrOfPieces]; 
@@ -124,6 +125,76 @@ namespace Ludo
             }
 
             return temp;
+        }
+
+        public void Move(int player, int piece, int spaces)
+        {
+            int currentPlayer = 0;
+            int currentPiece = 0;
+
+            pieces[player][piece].Move(spaces);
+
+            foreach (Array playerSet in PositionList())
+            {
+                currentPiece = 0;
+
+                if (currentPlayer != player)
+                {
+                    foreach (int space in playerSet)
+                    {
+                        if (pieces[player][piece].Position == space)
+                        {
+                            pieces[currentPlayer][currentPiece].Position = 0;
+                        }
+                        currentPiece++;
+                    }
+                    
+                }
+				currentPlayer ++;
+            }
+            Update();
+        }
+
+        // player done check
+        public bool PlayerDone(int player)
+        {
+            int nr = 0;
+
+            foreach (Piece piece in pieces[players[player].PlayerID])
+            {
+                if (piece.IsDone)
+                {
+                    nr++;
+                }
+            }
+
+            return (nr == nrOfPieces);
+        }
+
+        public bool GameWon()
+        {
+            if (!won)
+            {
+                // check last player's state
+            }
+
+            return won;
+        }
+
+        // game done check
+        public bool GameDone()
+        {
+            int nr = 0;
+
+            foreach (Player player in players)
+            {
+                if (PlayerDone(player.PlayerID))
+                {
+                    nr++;
+                }
+            }
+
+            return (nr > 2);
         }
 
         public void InitGame()
@@ -143,109 +214,102 @@ namespace Ludo
                 }
             }
 
-			board.Draw(PositionList());
+
+            Update();
 
 
             //board.PiecePlacement(PositionList());
 
 
+            #region auto (hardcoded garbage)(commented out)
+            //       while ((!pieces[0][0].IsDone() || !pieces[0][1].IsDone() ||
+            //               !pieces[0][2].IsDone() || !pieces[0][3].IsDone()) ||
 
-            //while ((!pieces[0][0].IsDone() || !pieces[0][1].IsDone() ||
-            //        !pieces[0][2].IsDone() || !pieces[0][3].IsDone()) ||
-            //
-            //       (!pieces[1][0].IsDone() || !pieces[1][1].IsDone() ||
-            //        !pieces[1][2].IsDone() || !pieces[1][3].IsDone()) ||
-            //
-            //       (!pieces[2][0].IsDone() || !pieces[2][1].IsDone() ||
-            //        !pieces[2][2].IsDone() || !pieces[2][3].IsDone()) ||
-            //
-            //       (!pieces[3][0].IsDone() || !pieces[3][1].IsDone() ||
-            //        !pieces[3][2].IsDone() || !pieces[3][3].IsDone()))
+            //              (!pieces[1][0].IsDone() || !pieces[1][1].IsDone() ||
+            //               !pieces[1][2].IsDone() || !pieces[1][3].IsDone()) ||
+
+            //              (!pieces[2][0].IsDone() || !pieces[2][1].IsDone() ||
+            //               !pieces[2][2].IsDone() || !pieces[2][3].IsDone()) ||
+
+            //              (!pieces[3][0].IsDone() || !pieces[3][1].IsDone() ||
+            //               !pieces[3][2].IsDone() || !pieces[3][3].IsDone()))
+            //       {
+
+            //           int i;
+            //           int moves;
+            //           bool moved;
+            //           int sleepTime = 500;
+
+            //           for (int ii = 0; ii < 4; ii++)
+            //           {
+            //            moves = 0;
+            //            moved = false;
+
+            //            if(!players[ii].Moved)
+            //            {
+            //                for (int a = 0; a < 3; a++)
+            //                {
+            //                    if (die.Throw() == 6)
+            //                    {
+            //                        Move(ii,0,1);
+
+            //                        Thread.Sleep(sleepTime);
+
+            //                        Move(ii,0,die.Throw());
+
+            //                        players[ii].Moved = true;
+
+            //                        Thread.Sleep(sleepTime);
+            //                    }
+            //                }
+            //            }
+
+            //            else
+            //            {
+            //                while (!moved && moves < 10)
+            //                {
+            //                    i = playerDie.Throw() - 1;
+
+            //                    die.Throw();
+
+            //                    if (pieces[ii][i].Position == 0 && die.LastThrow() == 6)
+            //                    {
+            //                        Move(ii,i,1);
+
+
+            //                        Thread.Sleep(sleepTime);
+
+            //                        Move(ii,i,die.Throw());
+
+            //                        players[ii].Moved = true;
+
+            //                        Thread.Sleep(sleepTime);
+            //                    }
+
+
+            //                    else if (!pieces[ii][i].IsDone())
+            //                    {
+            //                            Move(ii,i,die.LastThrow());
+
+            //if (die.LastThrow() != 6)
             //{
-            //
-     //           int i;
-     //           int moves;
-     //           bool moved;
-     //           int sleepTime = 50;
-                //
-     //           for (int ii = 0; ii < 4; ii++)
-     //           {
-					//moves = 0;
-        //            moved = false;
-                //
-        //            if(!players[ii].Moved)
-        //            {
-        //                for (int a = 0; a < 3; a++)
-        //                {
-        //                    if (die.Throw() == 6)
-        //                    {
-        //                        pieces[ii][0].Move(1);
-                //
-        //                        board.Draw(PositionList());
-                //
-        //                        Thread.Sleep(sleepTime);
-                //
-        //                        pieces[ii][0].Move(die.Throw());
-                //
-        //                        board.Draw(PositionList());
-                //
-        //                        players[ii].Moved = true;
-                //
-        //                        Thread.Sleep(sleepTime);
-        //                    }
-        //                }
-        //            }
-                //
-        //            else
-        //            {
-        //                while (!moved && moves < 10)
-        //                {
-        //                    i = playerDie.Throw() - 1;
+            //                        moved = true;
+            //                    }
 
-        //                    die.Throw();
+            //                        Thread.Sleep(sleepTime);
+            //                }
 
-        //                    if (pieces[ii][i].Position == 0 && die.LastThrow() == 6)
-        //                    {
-        //                        pieces[ii][i].Move(1);
-
-        //                        board.Draw(PositionList());
-
-        //                        Thread.Sleep(sleepTime);
-
-        //                        pieces[ii][i].Move(die.Throw());
-
-        //                        board.Draw(PositionList());
-
-        //                        players[ii].Moved = true;
-
-        //                        Thread.Sleep(sleepTime);
-        //                    }
-
-
-        //                    else if (!pieces[ii][i].IsDone())
-        //                    {
-        //                            pieces[ii][i].Move(die.LastThrow());
-
-        //                            board.Draw(PositionList());
-
-								//if (die.LastThrow() != 6)
-								//{
-                //                    moved = true;
-                //                }
-
-                //                    Thread.Sleep(sleepTime);
-                //            }
-
-                //            else
-                //            {
-                //                moves++;
-                //            }
-                //        }
-                //    }
-                //}
-
-
+            //                else
+            //                {
+            //                    moves++;
+            //                }
+            //            }
+            //        }
+            //    }
             //}
+            #endregion
+
+            #region player path print (commented out)
             //Console.WriteLine("player paths:");
             //int pathy = 0;
             //Console.WriteLine();
@@ -283,19 +347,7 @@ namespace Ludo
             //    Console.WriteLine(field);
             //    pathy++;
             //}
+            #endregion
         }
-
-		//public int[] PiecePosition(int player)
-		//{
-  //          int[] Temp = new int[nrOfPieces];
-
-  //          for (int i = 0; i < 4; i++)
-  //          {
-  //              Temp[i] = players[player].Place(pieces[player][i].Position);
-  //          }
-
-  //          return Temp;
-		//}
-
     }
 }

@@ -7,14 +7,16 @@ namespace Ludo
         private int[] path = new int[62];
         private Piece[] pieces = new Piece[4];
         private bool moved = false;
+        private int playerID;
 
-
-        public Player(int playerID)
+        public Player(int playerid)
         {
+            playerID = playerid;
 
             path[0] = 0;
             int a = 1;
 
+            #region player specific path (switch and for loops)
             switch (playerID)
             {
                 case 1:
@@ -126,6 +128,7 @@ namespace Ludo
                     break;
 
             }
+            #endregion
 
         }
 
@@ -173,6 +176,7 @@ namespace Ludo
                 return path[piecePosition];
             }
         }
+        public int PlayerID => playerID;
 
         public bool Moved 
         {
