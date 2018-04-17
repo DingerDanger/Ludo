@@ -5,18 +5,19 @@ namespace Ludo
 {
     public class Game
     {
-        private Player[] players = new Player[4];
+		private int nrOfPlayers = 4;
+		private int playerMin = 2;
+		private int playerMax = 4;
+		private int nrOfPieces = 4;
+		private int lastPlayer = 0;
+		
+        private bool won = false;
+        private Player[] players;
         private Piece[][] pieces = new Piece[4][];
         private Board board = new Board();
         private Dice die = new Dice(6);
-        private Dice playerDie = new Dice(4);
         ConsoleKeyInfo keyInfo;
 
-        private int nrOfPlayers = 4;
-        private int playerMin = 2;
-        private int playerMax = 4;
-        private int nrOfPieces = 4;
-        private bool won = false;
 
         public Game()
         {
@@ -108,13 +109,14 @@ namespace Ludo
         public void Update()
         {
             board.Draw(PositionList());
+
+            //WritePlayerName(lastPlayer);
         }
 
         public int[][] PositionList()
         {
             int[][] temp = new int[nrOfPlayers][];
 
-            // slå hjem mechanic
             for (int player = 0; player < nrOfPlayers; player++)
             {
                 temp[player] = new int[nrOfPieces]; 
@@ -197,11 +199,42 @@ namespace Ludo
             return (nr > 2);
         }
 
+        public void WritePlayerName(int player)
+        {
+            switch (player)
+            {
+                case 0:
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    break;
+
+                case 1:
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    break;
+
+                case 2:
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    break;
+
+                case 3:
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    break;
+
+                default:
+                    break;
+            }
+            int playNr = player + 1;
+            Console.WriteLine("player {0}", playNr);
+            Console.ResetColor();
+        }
+
         public void InitGame()
         {
+            players = new Player[nrOfPlayers];
+
+
             for (int i = 0; i < nrOfPlayers; i++)
             {
-                players[i] = new Player(i + 1);
+                players[i] = new Player(i);
             }
 
             for (int i = 0; i < nrOfPlayers; i++)
@@ -210,7 +243,7 @@ namespace Ludo
 
                 for (int a = 0; a < nrOfPieces; a++)
                 {
-                    pieces[i][a] = new Piece(a + 1);
+                    pieces[i][a] = new Piece(a);
                 }
             }
 
@@ -218,10 +251,62 @@ namespace Ludo
             Update();
 
 
+            while (!GameDone())
+            {
+                foreach (Player player in players)
+                {
+                    lastPlayer = player.PlayerID - 1;
+
+                    if (!player.InPlay)
+                    {
+                        for (int i = 0; i < 3; i++)
+                        {
+                            Console.WriteLine("throws left: {0}", 3 - i);
+
+                            if (die.Throw() == 6)
+                            {
+                                int tempPlayer = player.PlayerID;
+                                foreach (var piece in pieces[tempPlayer])
+                                {
+                                    if (piece.Position == 0)
+                                    {
+                                        Move(player.PlayerID, piece.GetId(), 1);
+
+                                        player.InPlay = true;
+
+                                        break;
+                                    }
+
+                                    throw new System.ArgumentException("piece positions doesn't match playerstate");
+
+                                }
+
+                                break;
+                            }
+
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("not 6");
+                            Console.ResetColor();
+                            Thread.Sleep(1000);
+                            Update();
+                        }
+                    }
+
+                    if (player.InPlay)
+                    {
+                        Console.WriteLine("throw dice, player {0}", player.PlayerID);
+                        die.Throw();
+
+                        //there's supposed to be more stuff in here. like, the rest of a turn,
+                        //but I need even more methods, and I'm just at a loss, I guess
+                    }
+                }
+            }
             //board.PiecePlacement(PositionList());
 
 
             #region auto (hardcoded garbage)(commented out)
+            //      private Dice playerDie = new Dice(4);
             //       while ((!pieces[0][0].IsDone() || !pieces[0][1].IsDone() ||
             //               !pieces[0][2].IsDone() || !pieces[0][3].IsDone()) ||
 

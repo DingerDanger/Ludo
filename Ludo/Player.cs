@@ -6,7 +6,7 @@ namespace Ludo
 
         private int[] path = new int[62];
         private Piece[] pieces = new Piece[4];
-        private bool moved = false;
+        private bool inPlay = false;
         private int playerID;
 
         public Player(int playerid)
@@ -19,7 +19,7 @@ namespace Ludo
             #region player specific path (switch and for loops)
             switch (playerID)
             {
-                case 1:
+                case 0:
 
                     for (int i = 1; i <= 51; i++)
                     {
@@ -42,7 +42,7 @@ namespace Ludo
 
                     break;
 
-                case 2:
+                case 1:
 
                     for (int i = 14; i <= 52; i++)
                     {
@@ -71,7 +71,7 @@ namespace Ludo
 
                     break;
 
-                case 3:
+                case 2:
 
                     for (int i = 27; i <= 52; i++)
                     {
@@ -99,7 +99,7 @@ namespace Ludo
 
                     break;
 
-                case 4:
+                case 3:
 
                     for (int i = 40; i <= 52; i++)
                     {
@@ -149,21 +149,20 @@ namespace Ludo
 
         public int Place(int piecePosition, int piece)
         {
-            piece += 1;
             if (piecePosition == 0)
             {
                 switch (piece)
                 {
-                    case 1:
+                    case 0:
                         return path[58];
 
-                    case 2:
+                    case 1:
                         return path[59];
 
-                    case 3:
+                    case 2:
                         return path[60];
 
-                    case 4:
+                    case 3:
                         return path[61];
 
                     default:
@@ -178,10 +177,10 @@ namespace Ludo
         }
         public int PlayerID => playerID;
 
-        public bool Moved 
+        public bool InPlay 
         {
-            get { return moved; }
-            set { moved = value; }
+            get { return inPlay; }
+            set { inPlay = value; }
         }
     }
 }

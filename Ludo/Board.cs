@@ -176,6 +176,8 @@ namespace Ludo
                 }
             }
 
+            //boLa stands for board layout. not ebola.
+
             boLa[0] = new char[] { 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B' };
 
             boLa[1] = new char[] { 'B', 'r', 'r', 'r', 'r', 'r', 'r', path[11], path[12], path[13], 'b', 'b', 'b', 'b', 'b', 'b', 'B' };
