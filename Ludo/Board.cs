@@ -1,14 +1,15 @@
 ﻿using System;
 namespace Ludo
 {
+    //OPTIMIZE Board
     public class Board
     {
         private string tileSize = "    ";
 
-        private char[][] boLa = new char[17][];
+        private char[][] boLa = new char[17][]; //BoardLayout
         private char[] path = new char[93];
         private char[] lastPath = new char[93];
-        private int[] placement = new int[16];
+        private int[] placement = new int[16]; //REMOVE
 
 
         public Board()

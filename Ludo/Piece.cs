@@ -1,41 +1,35 @@
 ﻿using System;
 namespace Ludo
 {
+    public enum PieceState { Home, Inplay, Safe, FInished}
+
     public class Piece
     {
-        private int id;
-        private int position = 0;
-        private bool done = false;
 
         public Piece(int tempId)
         {
-            id = tempId;
+            Id = tempId;
+            Position = 0;
         }
 
         public void Move(int spaces)
         { 
-            position += spaces;
+            Position += spaces;
 
-            if (position > 57)
+            if (Position > 57)
             {
-                int positionTemp = position - 57;
-                position = 57 - positionTemp;
+                int positionTemp = Position - 57;
+                Position = 57 - positionTemp;
             }
 
-            else if (position == 57)
+            else if (Position == 57)
             {
-                done = true;
+                State = PieceState.FInished;
             }
         }
 
-        public int GetId() => id;
-
-        public bool IsDone => done;
-
-        public int Position
-        {
-            get { return this.position; }
-            set { this.position = value; }
-        }
+        public int Id { get; private set; }
+        public PieceState State { get; set; }
+        public int Position { get; set; }
     }
 }

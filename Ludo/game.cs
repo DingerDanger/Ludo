@@ -3,6 +3,9 @@ using System.Threading;
 
 namespace Ludo
 {
+
+    enum GameState { Initializing, InPlay, Finished }
+
     public class Game
     {
 		private int nrOfPlayers = 4;
@@ -11,7 +14,7 @@ namespace Ludo
 		private int nrOfPieces = 4;
 		private int lastPlayer = 0;
 		
-        private bool won = false;
+        private bool won = false; //REMOVE
         private Player[] players;
         private Piece[][] pieces = new Piece[4][];
         private Board board = new Board();
@@ -302,137 +305,6 @@ namespace Ludo
                     }
                 }
             }
-            //board.PiecePlacement(PositionList());
-
-
-            #region auto (hardcoded garbage)(commented out)
-            //      private Dice playerDie = new Dice(4);
-            //       while ((!pieces[0][0].IsDone() || !pieces[0][1].IsDone() ||
-            //               !pieces[0][2].IsDone() || !pieces[0][3].IsDone()) ||
-
-            //              (!pieces[1][0].IsDone() || !pieces[1][1].IsDone() ||
-            //               !pieces[1][2].IsDone() || !pieces[1][3].IsDone()) ||
-
-            //              (!pieces[2][0].IsDone() || !pieces[2][1].IsDone() ||
-            //               !pieces[2][2].IsDone() || !pieces[2][3].IsDone()) ||
-
-            //              (!pieces[3][0].IsDone() || !pieces[3][1].IsDone() ||
-            //               !pieces[3][2].IsDone() || !pieces[3][3].IsDone()))
-            //       {
-
-            //           int i;
-            //           int moves;
-            //           bool moved;
-            //           int sleepTime = 500;
-
-            //           for (int ii = 0; ii < 4; ii++)
-            //           {
-            //            moves = 0;
-            //            moved = false;
-
-            //            if(!players[ii].Moved)
-            //            {
-            //                for (int a = 0; a < 3; a++)
-            //                {
-            //                    if (die.Throw() == 6)
-            //                    {
-            //                        Move(ii,0,1);
-
-            //                        Thread.Sleep(sleepTime);
-
-            //                        Move(ii,0,die.Throw());
-
-            //                        players[ii].Moved = true;
-
-            //                        Thread.Sleep(sleepTime);
-            //                    }
-            //                }
-            //            }
-
-            //            else
-            //            {
-            //                while (!moved && moves < 10)
-            //                {
-            //                    i = playerDie.Throw() - 1;
-
-            //                    die.Throw();
-
-            //                    if (pieces[ii][i].Position == 0 && die.LastThrow() == 6)
-            //                    {
-            //                        Move(ii,i,1);
-
-
-            //                        Thread.Sleep(sleepTime);
-
-            //                        Move(ii,i,die.Throw());
-
-            //                        players[ii].Moved = true;
-
-            //                        Thread.Sleep(sleepTime);
-            //                    }
-
-
-            //                    else if (!pieces[ii][i].IsDone())
-            //                    {
-            //                            Move(ii,i,die.LastThrow());
-
-            //if (die.LastThrow() != 6)
-            //{
-            //                        moved = true;
-            //                    }
-
-            //                        Thread.Sleep(sleepTime);
-            //                }
-
-            //                else
-            //                {
-            //                    moves++;
-            //                }
-            //            }
-            //        }
-            //    }
-            //}
-            #endregion
-
-            #region player path print (commented out)
-            //Console.WriteLine("player paths:");
-            //int pathy = 0;
-            //Console.WriteLine();
-            //Console.WriteLine("player1");
-            //foreach (int field in players[0].GetPath())
-            //{
-            //    Console.Write(pathy + ": ");
-            //    Console.WriteLine(field);
-            //    pathy++;
-            //}
-            //pathy = 0;
-            //Console.WriteLine();
-            //Console.WriteLine("player2");
-            //foreach (int field in players[1].GetPath())
-            //{
-            //    Console.Write(pathy + ": ");
-            //    Console.WriteLine(field);
-            //    pathy++;
-            //}
-            //pathy = 0;
-            //Console.WriteLine();
-            //Console.WriteLine("player3");
-            //foreach (int field in players[2].GetPath())
-            //{
-            //    Console.Write(pathy + ": ");
-            //    Console.WriteLine(field);
-            //    pathy++;
-            //}
-            //pathy = 0;
-            //Console.WriteLine();
-            //Console.WriteLine("player4");
-            //foreach (int field in players[3].GetPath())
-            //{
-            //    Console.Write(pathy + ": ");
-            //    Console.WriteLine(field);
-            //    pathy++;
-            //}
-            #endregion
         }
     }
 }
