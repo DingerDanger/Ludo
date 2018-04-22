@@ -2,12 +2,12 @@
   <MonoDevelop.Ide.Workbench ActiveDocument="Ludo/Game.cs">
     <Files>
       <File FileName="Ludo/Program.cs" Line="16" Column="10" NotebookId="2" />
-      <File FileName="Ludo/Game.cs" Line="266" Column="14" NotebookId="2" />
-      <File FileName="Ludo/Dice.cs" Line="22" Column="1" NotebookId="2" />
-      <File FileName="Ludo/Board.cs" Line="201" Column="75" NotebookId="3" />
+      <File FileName="Ludo/Game.cs" Line="301" Column="27" NotebookId="2" />
+      <File FileName="Ludo/Dice.cs" Line="37" Column="26" NotebookId="2" />
+      <File FileName="Ludo/Board.cs" Line="186" Column="13" NotebookId="2" />
     </Files>
     <FloatingWindows>
-      <FloatingWindow WindowId="1" X="0" Y="0" Width="1280" Height="800">
+      <FloatingWindow WindowId="1" X="1280" Y="0" Width="1920" Height="1080">
         <Files>
           <File FileName="Ludo/Player.cs" Line="102" Column="23" />
           <File FileName="Ludo/Piece.cs" Line="9" Column="9" NotebookId="1" />

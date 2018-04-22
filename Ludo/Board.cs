@@ -9,7 +9,20 @@ namespace Ludo
         private char[] path = new char[93];
         private char[] lastPath = new char[93];
         private int[] placement = new int[16];
+        private int _selectedPiece = 0;
 
+            public int SelectedPiece
+        {
+            get { return _selectedPiece; }
+            set { _selectedPiece = value; }
+        }
+        private int _selectedPlayer = 9;
+
+        public int SelectedPlayer
+        {
+            get { return _selectedPlayer; }
+            set { _selectedPlayer = value; }
+        }
 
         public Board()
         {
@@ -35,15 +48,15 @@ namespace Ludo
                         switch (tile)
                         {
                             case 'r':
-								Console.BackgroundColor = ConsoleColor.Red;
+                                    Console.BackgroundColor = ConsoleColor.Red;
                                 break;
 
                             case 'b':
-								Console.BackgroundColor = ConsoleColor.Blue;
+                                Console.BackgroundColor = ConsoleColor.Blue;
                                 break;
 
                             case 'y':
-								Console.BackgroundColor = ConsoleColor.Yellow;
+                                Console.BackgroundColor = ConsoleColor.Yellow;
                                 break;
 
                             case 'g':
@@ -77,6 +90,10 @@ namespace Ludo
                             case '3':
                                 Console.BackgroundColor = ConsoleColor.DarkGreen;
                                 break;
+                            case '9':
+                                Console.BackgroundColor = ConsoleColor.Cyan;
+                                break;
+
                         }
                         Console.Write(this.tileSize);
                         Console.ResetColor();
@@ -169,10 +186,25 @@ namespace Ludo
 
             for (int i = 0; i < placeList.GetLength(0); i++)
             {
+                int piece = 0;
+                int mem = 0;
+
                 for (int ii = 0; ii < placeList[i].GetLength(0); ii++)
-                {
+                {              
+                        if (placeList[i][ii] > mem && placeList[i][ii] < 78)
+                    {
+                        piece = ii;
+                        mem = placeList[i][ii];
+                    }
                     char[] temp = i.ToString().ToCharArray();
                     path[placeList[i][ii]] = temp[0];
+                }
+                if (mem > 0 && _selectedPlayer == i)
+                {
+                    if (_selectedPiece > 0) piece = _selectedPiece-1;
+                    int val = 9;
+                    char[] temp = val.ToString().ToCharArray();
+                    path[placeList[i][piece]] = temp[0];
                 }
             }
 

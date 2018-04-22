@@ -3,3 +3,15 @@
 /Users/user/Projects/Ludo/Ludo/bin/Debug/Ludo.pdb
 /Users/user/Projects/Ludo/Ludo/obj/x86/Debug/Ludo.exe
 /Users/user/Projects/Ludo/Ludo/obj/x86/Debug/Ludo.pdb
+C:/Users/Michael/Desktop/Ludo-master/Ludo/bin/Debug/Ludo.exe
+C:/Users/Michael/Desktop/Ludo-master/Ludo/bin/Debug/Ludo.pdb
+C:/Users/Michael/Desktop/Ludo-master/Ludo/obj/x86/Debug/Ludo.csproj.CoreCompileInputs.cache
+C:/Users/Michael/Desktop/Ludo-master/Ludo/obj/x86/Debug/Ludo.exe
+C:/Users/Michael/Desktop/Ludo-master/Ludo/obj/x86/Debug/Ludo.pdb
+C:/Users/Michael/Desktop/Ludo-master/Ludo/obj/x86/Debug/Ludo.csprojResolveAssemblyReference.cache
+/Users/user/Downloads/Ludo-master/Ludo/bin/Debug/Ludo.exe
+/Users/user/Downloads/Ludo-master/Ludo/bin/Debug/Ludo.pdb
+/Users/user/Downloads/Ludo-master/Ludo/obj/x86/Debug/Ludo.csprojResolveAssemblyReference.cache
+/Users/user/Downloads/Ludo-master/Ludo/obj/x86/Debug/Ludo.csproj.CoreCompileInputs.cache
+/Users/user/Downloads/Ludo-master/Ludo/obj/x86/Debug/Ludo.exe
+/Users/user/Downloads/Ludo-master/Ludo/obj/x86/Debug/Ludo.pdb
