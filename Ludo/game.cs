@@ -11,13 +11,17 @@ namespace Ludo
         private int nrOfPieces = 4;
         private int lastPlayer = 0;
         private int result = 0;
-        private bool won = false;
+
+        private int winner = 5;
+
         private Player[] players;
         private Piece[][] pieces = new Piece[4][];
         private Board board = new Board();
         private Dice die = new Dice(6);
         ConsoleKeyInfo keyInfo;
 
+        enum state {won, done, going}
+		private state Gamestate = state.going;
 
         public Game()
         {
@@ -108,6 +112,7 @@ namespace Ludo
         {
             board.Draw(PositionList());
 
+            GameCheck();
             //WritePlayerName(lastPlayer);
         }
 
@@ -175,7 +180,7 @@ namespace Ludo
         }
 
         // player done check
-        public bool PlayerDone(int player)
+        public bool PlayerDoneCheck(int player)
         {
             int nr = 0;
 
@@ -190,30 +195,28 @@ namespace Ludo
             return (nr == nrOfPieces);
         }
 
-        public bool GameWon()
-        {
-            if (!won)
-            {
-                // check last player's state
-            }
-
-            return won;
-        }
-
         // game done check
-        public bool GameDone()
+        public void GameCheck()
         {
             int nr = 0;
 
             foreach (Player player in players)
             {
-                if (PlayerDone(player.PlayerID))
+                if (PlayerDoneCheck(player.PlayerID))
                 {
                     nr++;
+                    if(Gamestate != state.won)
+                    {
+                        winner = player.PlayerID;
+                        Gamestate = state.won;
+                    }
                 }
             }
 
-            return (nr > 2);
+            if (nrOfPieces - nr < 2)
+            {
+                Gamestate = state.done;
+            }
         }
 
         public void WritePlayerName(int player)
@@ -277,138 +280,144 @@ namespace Ludo
 
             Update();
 
-
-            while (!GameDone())
+            while (Gamestate ==state.going || Gamestate == state.won)
             {
                 foreach (Player player in players)
                 {
-                    PlayCheck(player.PlayerID);
-
-
-                    if (!player.InPlay)
+                    if(!PlayerDoneCheck(player.PlayerID))
                     {
-                        for (int i = 0; i < 3; i++)
+                        PlayCheck(player.PlayerID);
+
+
+                        if (!player.InPlay)
                         {
-                            Console.WriteLine("throws left: {0}", 3 - i);
-                            if (die.Throw() >= 0)
+                            for (int i = 0; i < 3; i++)
                             {
-                                int tempPlayer = player.PlayerID;
-                                foreach (var piece in pieces[tempPlayer])
+                                Console.WriteLine("throws left: {0}", 3 - i);
+                                if (die.Throw() >= 0)
                                 {
-                                    if (piece.Position == 0)
+                                    int tempPlayer = player.PlayerID;
+                                    foreach (var piece in pieces[tempPlayer])
                                     {
-                                        Move(player.PlayerID, piece.GetId(), 1);
+                                        if (piece.Position == 0)
+                                        {
+                                            Move(player.PlayerID, piece.GetId(), 1);
 
-                                        player.InPlay = true;
+                                            player.InPlay = true;
 
-                                        break;
+                                            break;
+                                        }
+
+                                        throw new System.ArgumentException("piece positions doesn't match playerstate");
+
                                     }
 
-                                    throw new System.ArgumentException("piece positions doesn't match playerstate");
+                                    break;
 
                                 }
-
-                                break;
-
-                            }
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine(" not 6");
-                            Console.ResetColor();
-                            Thread.Sleep(1000);
-                            Update();
-                        }
-                    }
-
-                    if (player.InPlay)
-                    {
-						for (int turns = 1; turns >= 1; turns--)
-						{
-                            Console.WriteLine("throw dice, player {0}", player.PlayerID);
-                            Console.WriteLine("selected: {0}", board.SelectedPiece);
-                            //result = die.Throw();
-                            while (!int.TryParse((keyInfo = Console.ReadKey(true)).KeyChar.ToString(), out result)) ;
-
-                            int cnt = 0;
-                            foreach (var piece in pieces[player.PlayerID])
-                            {
-                                if (piece.Position > 0)
-                                {
-                                    cnt++;
-                                }
-                            }
-
-                            if (result == 6)
-                            {
-                                turns++;
-								
-                                if (cnt < 4)
-								{
-									cnt++;
-								}
-                            }
-
-                            if (cnt == 1)
-                            {
-                                board.SelectedPiece = 1;
-                                Move(player.PlayerID, 0, result);
-                            }
-                            else
-                            {
-                                board.SelectedPlayer = player.PlayerID;
-
-                                while (true)
-                                {
-                                    Update();
-                                    Console.WriteLine("You rolled a {0}", result);
-                                    Console.WriteLine("Press 'T' to toggle Piece or Press Enter to select Piece , player {0}", player.PlayerID);
-                                    Console.WriteLine("selected: {0}", board.SelectedPiece);
-                                    ConsoleKeyInfo keyPressed = Console.ReadKey(true);
-                                    if (keyPressed.Key == ConsoleKey.T)
-                                    {
-                                        
-										if (board.SelectedPiece >= cnt)
-										{
-											board.SelectedPiece = 1;
-										}
-										else
-										{
-											board.SelectedPiece++;
-											
-										}
-                                        
-                                            if (pieces[player.PlayerID][board.SelectedPiece-1].IsDone)
-                                            {
-                                                board.SelectedPiece++;
-                                            }
-                                        
-
-                                    }
-                                    if (keyPressed.Key == ConsoleKey.Enter)
-                                    {
-                                        if (board.SelectedPiece > 0) break;
-                                    }
-
-
-                                }
-
-                                if (pieces[board.SelectedPlayer][board.SelectedPiece-1].Position == 0)
-                                {
-                                    Move(player.PlayerID, board.SelectedPiece-1, 1);
-                                }
-
-                                else
-                                {
-                                    Move(player.PlayerID, board.SelectedPiece-1, result);
-                                }
-
-                                board.SelectedPiece = 0;
-                                board.SelectedPlayer = 9;
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine(" not 6");
+                                Console.ResetColor();
+                                Thread.Sleep(1000);
                                 Update();
                             }
                         }
+
+                        if (player.InPlay)
+                        {
+                            for (int turns = 1; turns >= 1; turns--)
+                            {
+                                Console.WriteLine("throw dice, player {0}", player.PlayerID);
+                                Console.WriteLine("selected: {0}", board.SelectedPiece);
+                                result = die.Throw();
+                                //while (!int.TryParse((keyInfo = Console.ReadKey(true)).KeyChar.ToString(), out result)) ;
+
+                                int cnt = 0;
+                                foreach (var piece in pieces[player.PlayerID])
+                                {
+                                    if (piece.Position > 0)
+                                    {
+                                        cnt++;
+                                    }
+                                }
+
+                                if (result == 6)
+                                {
+                                    turns++;
+
+                                    if (cnt < 4)
+                                    {
+                                        cnt++;
+                                    }
+                                }
+
+                                if (cnt == 1)
+                                {
+                                    board.SelectedPiece = 1;
+                                    Move(player.PlayerID, 0, result);
+                                }
+                                else
+                                {
+                                    board.SelectedPlayer = player.PlayerID;
+
+                                    while (true)
+                                    {
+                                        Update();
+                                        Console.WriteLine("You rolled a {0}", result);
+                                        Console.WriteLine("Press 'T' to toggle Piece or Press Enter to select Piece , player {0}", player.PlayerID);
+                                        Console.WriteLine("selected: {0}", board.SelectedPiece);
+                                        ConsoleKeyInfo keyPressed = Console.ReadKey(true);
+                                        if (keyPressed.Key == ConsoleKey.T)
+                                        {
+
+                                            if (board.SelectedPiece >= cnt)
+                                            {
+                                                board.SelectedPiece = 1;
+                                            }
+                                            else
+                                            {
+                                                board.SelectedPiece++;
+
+                                            }
+
+                                            if (pieces[player.PlayerID][board.SelectedPiece - 1].IsDone)
+                                            {
+                                                board.SelectedPiece++;
+                                            }
+
+
+                                        }
+                                        if (keyPressed.Key == ConsoleKey.Enter)
+                                        {
+                                            if (board.SelectedPiece > 0) break;
+                                        }
+
+
+                                    }
+
+                                    if (pieces[board.SelectedPlayer][board.SelectedPiece - 1].Position == 0)
+                                    {
+                                        Move(player.PlayerID, board.SelectedPiece - 1, 1);
+                                    }
+
+                                    else
+                                    {
+                                        Move(player.PlayerID, board.SelectedPiece - 1, result);
+                                    }
+
+                                    board.SelectedPiece = 0;
+                                    board.SelectedPlayer = 9;
+                                    Update();
+                                }
+                            }
+                        }
+                        
                     }
+					if (Gamestate == state.done) break;
                 }
             }
+            Console.Clear();
+            Console.WriteLine("player {0} won", winner);
         }
         private void LuckySix(int player)
         {

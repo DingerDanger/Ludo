@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ludo", "Ludo\Ludo.csproj", "{2C9BE685-DB2A-426C-86A0-EEBC64A3AE83}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ludo.Library", "Ludo.Library\Ludo.Library.csproj", "{B7860119-1C53-4514-834D-438E774F599F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -13,5 +15,9 @@ Global
 		{2C9BE685-DB2A-426C-86A0-EEBC64A3AE83}.Debug|x86.Build.0 = Debug|x86
 		{2C9BE685-DB2A-426C-86A0-EEBC64A3AE83}.Release|x86.ActiveCfg = Release|x86
 		{2C9BE685-DB2A-426C-86A0-EEBC64A3AE83}.Release|x86.Build.0 = Release|x86
+		{B7860119-1C53-4514-834D-438E774F599F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B7860119-1C53-4514-834D-438E774F599F}.Debug|x86.Build.0 = Debug|Any CPU
+		{B7860119-1C53-4514-834D-438E774F599F}.Release|x86.ActiveCfg = Release|Any CPU
+		{B7860119-1C53-4514-834D-438E774F599F}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
